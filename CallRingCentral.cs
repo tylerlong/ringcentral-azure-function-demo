@@ -27,10 +27,13 @@ namespace com.ringcentral.demos
             var password = req.Query["password"];
             
             var rc = new RestClient(clientId, clientSecret, true);
-            await rc.Authorize(username, extension, password);
-            var r = await rc.Restapi().Account().Extension().CallLog().List();
-
-            return new OkObjectResult(JsonConvert.SerializeObject(r, Formatting.Indented));
+            try {
+                await rc.Authorize(username, extension, password);
+                var r = await rc.Restapi().Account().Extension().CallLog().List();
+                return new OkObjectResult(DateTime.Now.ToString("yyyyMMdd HH:mm:ss ffff") + "\n\n" + JsonConvert.SerializeObject(r, Formatting.Indented));
+            } catch(RestException re) {
+                return new OkObjectResult(DateTime.Now.ToString("yyyyMMdd HH:mm:ss ffff") + "\n\n" + Utils.FormatHttpMessage(re.httpResponseMessage, re.httpRequestMessage));
+            }
         }
     }
 }
