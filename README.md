@@ -8,9 +8,9 @@ Ref: https://docs.microsoft.com/en-us/azure/azure-functions/create-first-functio
 
 ## Local run
 
-In Visual Code terminal press "F5"
+In Visual Studio Code terminal press "F5"
 
-Visit http://localhost:7071/api/CallRingCentral
+Visit http://localhost:7071/api/CallRingCentral?clientId=<clientId>&clinetSecret=<clientSecret>&username=<username>&extension=<extension>&password=<password>
 
 
 ## Deploy to Azure
